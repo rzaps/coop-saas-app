@@ -53,6 +53,11 @@ def validate_telegram_init_data(init_data: str, bot_token: str) -> dict:
         digestmod=hashlib.sha256
     ).hexdigest()
 
+    # Debug logging
+    print(f"BOT_TOKEN: {bot_token[:10]}...")
+    print(f"received_hash: {received_hash}")
+    print(f"calculated_hash: {calculated_hash}")
+
     if calculated_hash != received_hash:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
