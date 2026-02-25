@@ -1,9 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from alembic.config import Config
+from alembic import command
+import os
+
 from app.routers import auth, onboarding, catalog, cart, orders
 from app.routers.admin import categories, products, orders as admin_orders, users
 
+def run_migrations():
+    alembic_cfg = Config("/app/alembic.ini")
+    command.upgrade(alembic_cfg, "head")
+
 app = FastAPI(title="Group Purchase API")
+
+@app.on_event("startup")
+async def startup_event():
+    run_migrations()
 
 # CORS configuration for Telegram Mini App
 # Allow all origins since Telegram Mini Apps can open from various domains
