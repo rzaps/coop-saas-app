@@ -44,3 +44,20 @@ async def debug_tables(db: AsyncSession = Depends(get_db)):
 async def debug_alembic(db: AsyncSession = Depends(get_db)):
     result = await db.execute(text("SELECT * FROM alembic_version"))
     return {"version": [row[0] for row in result.fetchall()]}
+
+@app.get("/debug/migrate")
+async def run_migrate():
+    import subprocess
+    import os
+    result = subprocess.run(
+        ["alembic", "upgrade", "head"],
+        capture_output=True,
+        text=True,
+        env=os.environ.copy(),
+        cwd="/app"
+    )
+    return {
+        "stdout": result.stdout,
+        "stderr": result.stderr,
+        "returncode": result.returncode
+    }
