@@ -5,19 +5,6 @@ from app.routers.admin import categories, products, orders as admin_orders, user
 
 app = FastAPI(title="Group Purchase API")
 
-@app.on_event("startup")
-async def startup_event():
-    import subprocess
-    import os
-    result = subprocess.run(
-        ["alembic", "upgrade", "head"],
-        capture_output=True,
-        text=True,
-        env=os.environ.copy()
-    )
-    print(result.stdout)
-    print(result.stderr)
-
 # CORS configuration for Telegram Mini App
 # Allow all origins since Telegram Mini Apps can open from various domains
 # (web.telegram.org, tg.dev, k.tg.dev, desktop app with null origin)
