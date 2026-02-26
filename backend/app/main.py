@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.routers import auth, onboarding, catalog, cart, orders
+from app.routers import auth, onboarding, catalog, cart, orders, invites
 from app.routers.admin import categories, products, orders as admin_orders, users
 from app.database import get_db
 
@@ -24,6 +24,7 @@ app.include_router(onboarding.router)
 app.include_router(catalog.router)
 app.include_router(cart.router)
 app.include_router(orders.router)
+app.include_router(invites.router)
 
 # Admin routes
 app.include_router(categories.router)

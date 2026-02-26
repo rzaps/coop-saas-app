@@ -17,3 +17,4 @@ class User(Base):
     orders: Mapped[list["Order"]] = relationship(back_populates="user")
     categories_created: Mapped[list["Category"]] = relationship(back_populates="admin")
     products_created: Mapped[list["Product"]] = relationship(back_populates="admin")
+    invite_codes: Mapped[list["InviteCode"]] = relationship(back_populates="creator")

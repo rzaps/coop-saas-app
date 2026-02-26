@@ -3,7 +3,7 @@ import hashlib
 import json
 from urllib.parse import urlencode
 
-bot_token = "7956470571:AAF7vlPGvx4aqSiOr5o23mWJtt5BoGjDKqg"
+bot_token = "8709933958:AAHVRL22Zd3XPWii6trMaxu_r7d3tqt0WyQ"
 user_data = {"id": 123456789, "first_name": "Test", "last_name": "User"}
 auth_date = "1708862400"
 

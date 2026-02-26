@@ -9,6 +9,9 @@ declare global {
     Telegram?: {
       WebApp: {
         initData: string
+        initDataUnsafe?: {
+          start_param?: string
+        }
         ready: () => void
       }
     }
@@ -53,13 +56,22 @@ export default function Login() {
         const params = new URLSearchParams(location.search)
         const from = params.get('from') || '/catalog'
 
+        // Check for invite code from Telegram start_param
+        const startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param || ''
+        const inviteCode = startParam.startsWith('invite_') ? startParam.replace('invite_', '') : null
+
         // Try to get catalog - if 404 with needs_onboarding, redirect to onboarding
         try {
           await api.get('/catalog')
           navigate(from)
         } catch (error: any) {
           if (error.response?.status === 404 && error.response?.data?.detail?.needs_onboarding) {
-            navigate('/onboarding')
+            // Redirect to onboarding with invite code if present
+            if (inviteCode) {
+              navigate(`/onboarding?code=${inviteCode}`)
+            } else {
+              navigate('/onboarding')
+            }
           } else {
             navigate(from)
           }

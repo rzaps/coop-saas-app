@@ -15,3 +15,4 @@ class ResidentialComplex(Base):
     categories: Mapped[list["Category"]] = relationship(back_populates="complex")
     products: Mapped[list["Product"]] = relationship(back_populates="complex")
     orders: Mapped[list["Order"]] = relationship(back_populates="complex")
+    invite_codes: Mapped[list["InviteCode"]] = relationship(back_populates="complex")
