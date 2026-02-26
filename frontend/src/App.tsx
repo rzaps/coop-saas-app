@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './contexts/AuthContext'
+import HelpButton from './components/HelpButton'
 import Login from './pages/Login'
 import Onboarding from './pages/Onboarding'
 import Catalog from './pages/Catalog'
@@ -14,27 +15,39 @@ import AdminUsers from './pages/admin/Users'
 
 const queryClient = new QueryClient()
 
+function AppContent() {
+  const location = useLocation()
+  const showHelpButton = location.pathname !== '/login'
+
+  return (
+    <>
+      <div className="min-h-screen bg-gray-50">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </div>
+      {showHelpButton && <HelpButton />}
+      <Toaster position="top-center" />
+    </>
+  )
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-gray-50">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/onboarding" element={<Onboarding />} />
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/admin/categories" element={<AdminCategories />} />
-              <Route path="/admin/products" element={<AdminProducts />} />
-              <Route path="/admin/orders" element={<AdminOrders />} />
-              <Route path="/admin/users" element={<AdminUsers />} />
-              <Route path="/" element={<Navigate to="/login" replace />} />
-            </Routes>
-          </div>
+          <AppContent />
         </BrowserRouter>
-        <Toaster position="top-center" />
       </AuthProvider>
     </QueryClientProvider>
   )
