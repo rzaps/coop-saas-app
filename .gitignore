@@ -27,5 +27,5 @@ dist/
 build/
 
 # Alembic
-backend/alembic/versions/*.py
+# Migrations should be committed
 !backend/alembic/versions/.gitkeep
