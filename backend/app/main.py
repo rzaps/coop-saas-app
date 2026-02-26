@@ -1,7 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.routers import auth, onboarding, catalog, cart, orders
 from app.routers.admin import categories, products, orders as admin_orders, users
+from app.database import get_db
 
 app = FastAPI(title="Group Purchase API")
 
@@ -31,3 +34,8 @@ app.include_router(users.router)
 @app.get("/")
 def read_root():
     return {"message": "Group Purchase API"}
+
+@app.get("/debug/tables")
+async def debug_tables(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(text("SELECT tablename FROM pg_tables WHERE schemaname='public'"))
+    return {"tables": [row[0] for row in result.fetchall()]}
