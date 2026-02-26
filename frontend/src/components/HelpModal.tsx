@@ -119,12 +119,12 @@ export default function HelpModal({ isOpen, onClose }: HelpModalProps) {
               <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Поддержка:</p>
                 <a
-                  href="https://t.me/your_support_username"
+                  href="https://t.me/Denis_V_K"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 font-medium hover:underline"
                 >
-                  @your_support_username
+                  @Denis_V_K
                 </a>
               </div>
             </div>
