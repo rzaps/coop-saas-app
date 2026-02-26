@@ -44,7 +44,7 @@ export default function AdminOrders() {
       .join('\n')
 
     navigator.clipboard.writeText(text)
-    toast.success('Copied to clipboard!')
+    toast.success('Скопировано в буфер обмена!')
   }
 
   if (aggregationsLoading || commentsLoading) {
@@ -61,42 +61,42 @@ export default function AdminOrders() {
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Orders Summary</h1>
+        <h1 className="text-2xl font-bold">Сводка заказов</h1>
         <button
           onClick={() => navigate('/admin/categories')}
           className="text-blue-600 hover:text-blue-700"
         >
-          Back
+          Назад
         </button>
       </div>
 
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Aggregated Orders</h2>
+          <h2 className="text-lg font-semibold">Агрегированные заказы</h2>
           <button
             onClick={copyToClipboard}
             disabled={aggregations.length === 0}
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-400 text-sm"
           >
-            Copy
+            Копировать
           </button>
         </div>
 
         {aggregations.length === 0 ? (
-          <p className="text-gray-600 text-center py-8">No confirmed orders yet</p>
+          <p className="text-gray-600 text-center py-8">Подтвержденных заказов пока нет</p>
         ) : (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    Product
+                    Товар
                   </th>
                   <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
-                    Quantity
+                    Количество
                   </th>
                   <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
-                    Orders
+                    Заказов
                   </th>
                 </tr>
               </thead>
@@ -117,9 +117,9 @@ export default function AdminOrders() {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Order Comments</h2>
+        <h2 className="text-lg font-semibold mb-4">Комментарии к заказам</h2>
         {comments.length === 0 ? (
-          <p className="text-gray-600 text-center py-8">No comments yet</p>
+          <p className="text-gray-600 text-center py-8">Комментариев пока нет</p>
         ) : (
           <div className="space-y-4">
             {comments.map((comment) => (
@@ -142,7 +142,7 @@ export default function AdminOrders() {
           onClick={() => navigate('/admin/users')}
           className="w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
         >
-          Manage Users
+          Управление пользователями
         </button>
       </div>
     </div>

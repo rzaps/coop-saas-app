@@ -45,23 +45,23 @@ export default function Orders() {
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">My Orders</h1>
+        <h1 className="text-2xl font-bold">Мои заказы</h1>
         <button
           onClick={() => navigate('/catalog')}
           className="text-blue-600 hover:text-blue-700"
         >
-          Back to Catalog
+          Назад в каталог
         </button>
       </div>
 
       {orders.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No orders yet</p>
+          <p className="text-gray-600 mb-4">Заказов пока нет</p>
           <button
             onClick={() => navigate('/catalog')}
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
           >
-            Start Shopping
+            Начать покупки
           </button>
         </div>
       ) : (
@@ -80,7 +80,7 @@ export default function Orders() {
                         : 'bg-gray-100 text-gray-800'
                     }`}
                   >
-                    {order.status}
+                    {order.status === 'confirmed' ? 'Подтвержден' : order.status}
                   </span>
                 </div>
                 <p className="text-xl font-bold text-blue-600">{order.total} ₽</p>
@@ -99,7 +99,7 @@ export default function Orders() {
 
               {order.comment && (
                 <div className="border-t pt-3">
-                  <p className="text-sm text-gray-600">Comment:</p>
+                  <p className="text-sm text-gray-600">Комментарий:</p>
                   <p className="text-sm mt-1">{order.comment}</p>
                 </div>
               )}

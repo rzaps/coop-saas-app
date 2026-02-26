@@ -53,7 +53,7 @@ export default function Cart() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
-      toast.success('Item removed')
+      toast.success('Товар удален')
     },
   })
 
@@ -64,7 +64,7 @@ export default function Cart() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
-      toast.success('Comment updated')
+      toast.success('Комментарий обновлен')
     },
   })
 
@@ -74,11 +74,11 @@ export default function Cart() {
       return response.data
     },
     onSuccess: () => {
-      toast.success('Order confirmed!')
+      toast.success('Заказ подтвержден!')
       navigate('/orders')
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.detail || 'Failed to confirm order')
+      toast.error(error.response?.data?.detail || 'Не удалось подтвердить заказ')
     },
   })
 
@@ -95,23 +95,23 @@ export default function Cart() {
   return (
     <div className="max-w-md mx-auto p-4 pb-32">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Cart</h1>
+        <h1 className="text-2xl font-bold">Корзина</h1>
         <button
           onClick={() => navigate('/catalog')}
           className="text-blue-600 hover:text-blue-700"
         >
-          Back to Catalog
+          Назад в каталог
         </button>
       </div>
 
       {cart.items.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">Your cart is empty</p>
+          <p className="text-gray-600 mb-4">Ваша корзина пуста</p>
           <button
             onClick={() => navigate('/catalog')}
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
           >
-            Go to Catalog
+            Перейти в каталог
           </button>
         </div>
       ) : (
@@ -179,7 +179,7 @@ export default function Cart() {
 
           <div className="bg-white rounded-lg shadow p-4 mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Comment (optional)
+              Комментарий (необязательно)
             </label>
             <textarea
               value={comment}
@@ -187,14 +187,14 @@ export default function Cart() {
               onBlur={() => updateCommentMutation.mutate(comment)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={3}
-              placeholder="Add a comment to your order..."
+              placeholder="Добавьте комментарий к заказу..."
             />
           </div>
 
           <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4 shadow-lg">
             <div className="max-w-md mx-auto">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold">Total:</span>
+                <span className="text-lg font-semibold">Итого:</span>
                 <span className="text-2xl font-bold text-blue-600">{cart.total} ₽</span>
               </div>
               <button
@@ -202,7 +202,7 @@ export default function Cart() {
                 disabled={confirmOrderMutation.isPending}
                 className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold"
               >
-                {confirmOrderMutation.isPending ? 'Confirming...' : 'Confirm Order'}
+                {confirmOrderMutation.isPending ? 'Подтверждение...' : 'Подтвердить заказ'}
               </button>
             </div>
           </div>

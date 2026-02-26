@@ -47,10 +47,10 @@ export default function Catalog() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
-      toast.success('Added to cart')
+      toast.success('Добавлено в корзину')
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.detail || 'Failed to add to cart')
+      toast.error(error.response?.data?.detail || 'Не удалось добавить в корзину')
     },
   })
 
@@ -72,12 +72,12 @@ export default function Catalog() {
   return (
     <div className="max-w-md mx-auto p-4 pb-20">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Catalog</h1>
+        <h1 className="text-2xl font-bold">Каталог</h1>
         <button
           onClick={() => navigate('/cart')}
           className="relative bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
         >
-          Cart
+          Корзина
           {cartItemsCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
               {cartItemsCount}
@@ -95,7 +95,7 @@ export default function Catalog() {
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
         >
-          All
+          Все
         </button>
         {categories.map((category) => (
           <button
@@ -140,7 +140,7 @@ export default function Catalog() {
                     onClick={() => addToCartMutation.mutate({ product_id: product.id, quantity: 1 })}
                     className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 mt-2"
                   >
-                    Add to Cart
+                    В корзину
                   </button>
                 )}
               </div>
@@ -155,13 +155,13 @@ export default function Catalog() {
             onClick={() => navigate('/orders')}
             className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
           >
-            Orders
+            Заказы
           </button>
           <button
             onClick={() => navigate('/admin/categories')}
             className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
           >
-            Admin
+            Админ
           </button>
         </div>
       </div>

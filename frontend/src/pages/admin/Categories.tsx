@@ -37,7 +37,7 @@ export default function AdminCategories() {
       queryClient.invalidateQueries({ queryKey: ['admin-categories'] })
       setShowCreateForm(false)
       setNewCategoryName('')
-      toast.success('Category created')
+      toast.success('Категория создана')
     },
   })
 
@@ -49,7 +49,7 @@ export default function AdminCategories() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-categories'] })
       setEditingId(null)
-      toast.success('Category updated')
+      toast.success('Категория обновлена')
     },
   })
 
@@ -59,7 +59,7 @@ export default function AdminCategories() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-categories'] })
-      toast.success('Category archived')
+      toast.success('Категория архивирована')
     },
   })
 
@@ -76,12 +76,12 @@ export default function AdminCategories() {
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Categories</h1>
+        <h1 className="text-2xl font-bold">Категории</h1>
         <button
           onClick={() => navigate('/catalog')}
           className="text-blue-600 hover:text-blue-700"
         >
-          Back
+          Назад
         </button>
       </div>
 
@@ -90,7 +90,7 @@ export default function AdminCategories() {
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
         >
-          {showCreateForm ? 'Cancel' : 'Create Category'}
+          {showCreateForm ? 'Отмена' : 'Создать категорию'}
         </button>
 
         {showCreateForm && (
@@ -99,7 +99,7 @@ export default function AdminCategories() {
               type="text"
               value={newCategoryName}
               onChange={(e) => setNewCategoryName(e.target.value)}
-              placeholder="Category name"
+              placeholder="Название категории"
               className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2"
             />
             <button
@@ -107,7 +107,7 @@ export default function AdminCategories() {
               disabled={!newCategoryName.trim()}
               className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400"
             >
-              Create
+              Создать
             </button>
           </div>
         )}
@@ -136,13 +136,13 @@ export default function AdminCategories() {
                     }
                     className="flex-1 bg-green-600 text-white py-2 rounded-md hover:bg-green-700"
                   >
-                    Save
+                    Сохранить
                   </button>
                   <button
                     onClick={() => setEditingId(null)}
                     className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-400"
                   >
-                    Cancel
+                    Отмена
                   </button>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function AdminCategories() {
                 <div className="flex justify-between items-center mb-2">
                   <h3 className="font-semibold">{category.name}</h3>
                   <span className="text-sm text-gray-600">
-                    {category.is_active ? 'Active' : 'Archived'}
+                    {category.is_active ? 'Активна' : 'Архивирована'}
                   </span>
                 </div>
                 <div className="flex gap-2">
@@ -162,14 +162,14 @@ export default function AdminCategories() {
                     }}
                     className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
                   >
-                    Edit
+                    Изменить
                   </button>
                   {category.is_active && (
                     <button
                       onClick={() => archiveMutation.mutate(category.id)}
                       className="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
                     >
-                      Archive
+                      Архивировать
                     </button>
                   )}
                 </div>
@@ -184,13 +184,13 @@ export default function AdminCategories() {
           onClick={() => navigate('/admin/products')}
           className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
         >
-          Products
+          Товары
         </button>
         <button
           onClick={() => navigate('/admin/orders')}
           className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
         >
-          Orders
+          Заказы
         </button>
       </div>
     </div>

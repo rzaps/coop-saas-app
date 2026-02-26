@@ -61,7 +61,7 @@ export default function AdminProducts() {
       queryClient.invalidateQueries({ queryKey: ['admin-products'] })
       setShowCreateForm(false)
       setFormData({ name: '', price: '', unit: 'kg', note: '', category_id: '' })
-      toast.success('Product created')
+      toast.success('Товар создан')
     },
   })
 
@@ -77,7 +77,7 @@ export default function AdminProducts() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-products'] })
       setEditingId(null)
-      toast.success('Product updated')
+      toast.success('Товар обновлен')
     },
   })
 
@@ -88,7 +88,7 @@ export default function AdminProducts() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-products'] })
-      toast.success('Product availability toggled')
+      toast.success('Доступность товара изменена')
     },
   })
 
@@ -106,12 +106,12 @@ export default function AdminProducts() {
   return (
     <div className="max-w-md mx-auto p-4 pb-20">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Products</h1>
+        <h1 className="text-2xl font-bold">Товары</h1>
         <button
           onClick={() => navigate('/admin/categories')}
           className="text-blue-600 hover:text-blue-700"
         >
-          Back
+          Назад
         </button>
       </div>
 
@@ -120,7 +120,7 @@ export default function AdminProducts() {
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
         >
-          {showCreateForm ? 'Cancel' : 'Create Product'}
+          {showCreateForm ? 'Отмена' : 'Создать товар'}
         </button>
 
         {showCreateForm && (
@@ -129,14 +129,14 @@ export default function AdminProducts() {
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Product name"
+              placeholder="Название товара"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
             <input
               type="number"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              placeholder="Price"
+              placeholder="Цена"
               step="0.01"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -145,15 +145,15 @@ export default function AdminProducts() {
               onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             >
-              <option value="kg">kg</option>
-              <option value="pcs">pcs</option>
+              <option value="kg">кг</option>
+              <option value="pcs">шт</option>
             </select>
             <select
               value={formData.category_id}
               onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             >
-              <option value="">Select category</option>
+              <option value="">Выберите категорию</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
@@ -163,7 +163,7 @@ export default function AdminProducts() {
             <textarea
               value={formData.note}
               onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-              placeholder="Note (optional)"
+              placeholder="Примечание (необязательно)"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               rows={2}
             />
@@ -172,7 +172,7 @@ export default function AdminProducts() {
               disabled={!formData.name || !formData.price || !formData.category_id}
               className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400"
             >
-              Create
+              Создать
             </button>
           </div>
         )}
@@ -203,7 +203,7 @@ export default function AdminProducts() {
                     : 'bg-red-100 text-red-800'
                 }`}
               >
-                {product.available ? 'Available' : 'Unavailable'}
+                {product.available ? 'Доступен' : 'Недоступен'}
               </span>
             </div>
             <div className="flex gap-2 mt-3">
@@ -211,7 +211,7 @@ export default function AdminProducts() {
                 onClick={() => toggleMutation.mutate(product.id)}
                 className="flex-1 bg-yellow-600 text-white py-2 rounded-md hover:bg-yellow-700 text-sm"
               >
-                Toggle
+                Переключить
               </button>
               <button
                 onClick={() => {
@@ -226,7 +226,7 @@ export default function AdminProducts() {
                 }}
                 className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 text-sm"
               >
-                Edit
+                Изменить
               </button>
             </div>
 
@@ -252,13 +252,13 @@ export default function AdminProducts() {
                     }
                     className="flex-1 bg-green-600 text-white py-2 rounded-md hover:bg-green-700"
                   >
-                    Save
+                    Сохранить
                   </button>
                   <button
                     onClick={() => setEditingId(null)}
                     className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-400"
                   >
-                    Cancel
+                    Отмена
                   </button>
                 </div>
               </div>

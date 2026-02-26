@@ -32,10 +32,10 @@ export default function AdminUsers() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] })
-      toast.success('Role updated')
+      toast.success('Роль обновлена')
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.detail || 'Failed to update role')
+      toast.error(error.response?.data?.detail || 'Не удалось обновить роль')
     },
   })
 
@@ -49,10 +49,10 @@ export default function AdminUsers() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] })
       setTransferUserId(null)
-      toast.success('Ownership transferred')
+      toast.success('Владение передано')
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.detail || 'Failed to transfer ownership')
+      toast.error(error.response?.data?.detail || 'Не удалось передать владение')
     },
   })
 
@@ -69,12 +69,12 @@ export default function AdminUsers() {
   return (
     <div className="max-w-md mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Manage Users</h1>
+        <h1 className="text-2xl font-bold">Управление пользователями</h1>
         <button
           onClick={() => navigate('/admin/orders')}
           className="text-blue-600 hover:text-blue-700"
         >
-          Back
+          Назад
         </button>
       </div>
 
@@ -110,7 +110,7 @@ export default function AdminUsers() {
                     }
                     className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 text-sm"
                   >
-                    Make Admin
+                    Сделать админом
                   </button>
                 ) : (
                   <button
@@ -119,14 +119,14 @@ export default function AdminUsers() {
                     }
                     className="flex-1 bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 text-sm"
                   >
-                    Remove Admin
+                    Снять админа
                   </button>
                 )}
                 <button
                   onClick={() => setTransferUserId(user.id)}
                   className="flex-1 bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 text-sm"
                 >
-                  Transfer Ownership
+                  Передать владение
                 </button>
               </div>
             )}
@@ -134,21 +134,20 @@ export default function AdminUsers() {
             {transferUserId === user.id && (
               <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
                 <p className="text-sm text-yellow-800 mb-3">
-                  Are you sure you want to transfer super_admin role to this user? You will
-                  become admin.
+                  Вы уверены, что хотите передать роль super_admin этому пользователю? Вы станете админом.
                 </p>
                 <div className="flex gap-2">
                   <button
                     onClick={() => transferOwnershipMutation.mutate(user.id)}
                     className="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 text-sm"
                   >
-                    Confirm Transfer
+                    Подтвердить передачу
                   </button>
                   <button
                     onClick={() => setTransferUserId(null)}
                     className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-400 text-sm"
                   >
-                    Cancel
+                    Отмена
                   </button>
                 </div>
               </div>
