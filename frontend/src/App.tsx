@@ -12,7 +12,7 @@ import AdminCategories from './pages/admin/Categories'
 import AdminProducts from './pages/admin/Products'
 import AdminOrders from './pages/admin/Orders'
 import AdminUsers from './pages/admin/Users'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 const queryClient = new QueryClient()
 
@@ -43,6 +43,12 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
 function AppContent() {
   const location = useLocation()
   const showHelpButton = location.pathname !== '/login'
+
+  useEffect(() => {
+    const ping = () => fetch('https://coop-saas-app.onrender.com/')
+    const interval = setInterval(ping, 14 * 60 * 1000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <>
