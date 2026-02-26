@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import api, { setAuthToken } from '../lib/axios'
 import toast from 'react-hot-toast'
@@ -17,6 +17,7 @@ declare global {
 
 export default function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { login } = useAuth()
 
   useEffect(() => {
@@ -48,15 +49,19 @@ export default function Login() {
           first_name: 'User',
         })
 
+        // Get redirect path from URL parameter
+        const params = new URLSearchParams(location.search)
+        const from = params.get('from') || '/catalog'
+
         // Try to get catalog - if 404 with needs_onboarding, redirect to onboarding
         try {
           await api.get('/catalog')
-          navigate('/catalog')
+          navigate(from)
         } catch (error: any) {
           if (error.response?.status === 404 && error.response?.data?.detail?.needs_onboarding) {
             navigate('/onboarding')
           } else {
-            navigate('/catalog')
+            navigate(from)
           }
         }
       } catch (error: any) {
@@ -65,7 +70,7 @@ export default function Login() {
     }
 
     performLogin()
-  }, [login, navigate])
+  }, [login, navigate, location])
 
   return (
     <div className="flex items-center justify-center min-h-screen">

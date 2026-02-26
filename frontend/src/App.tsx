@@ -15,6 +15,11 @@ import AdminUsers from './pages/admin/Users'
 
 const queryClient = new QueryClient()
 
+function RedirectToLogin() {
+  const location = useLocation()
+  return <Navigate to={`/login?from=${encodeURIComponent(location.pathname)}`} replace />
+}
+
 function AppContent() {
   const location = useLocation()
   const showHelpButton = location.pathname !== '/login'
@@ -33,6 +38,7 @@ function AppContent() {
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<RedirectToLogin />} />
         </Routes>
       </div>
       {showHelpButton && <HelpButton />}
