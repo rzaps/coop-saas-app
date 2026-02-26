@@ -39,3 +39,8 @@ def read_root():
 async def debug_tables(db: AsyncSession = Depends(get_db)):
     result = await db.execute(text("SELECT tablename FROM pg_tables WHERE schemaname='public'"))
     return {"tables": [row[0] for row in result.fetchall()]}
+
+@app.get("/debug/alembic")
+async def debug_alembic(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(text("SELECT * FROM alembic_version"))
+    return {"version": [row[0] for row in result.fetchall()]}
