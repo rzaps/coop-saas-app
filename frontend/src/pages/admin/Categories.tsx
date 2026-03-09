@@ -179,18 +179,24 @@ export default function AdminCategories() {
         ))}
       </div>
 
-      <div className="mt-6 flex gap-2">
+      <div className="mt-6 grid grid-cols-3 gap-2">
         <button
           onClick={() => navigate('/admin/products')}
-          className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
+          className="bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
         >
           Товары
         </button>
         <button
           onClick={() => navigate('/admin/orders')}
-          className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
+          className="bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
         >
           Заказы
+        </button>
+        <button
+          onClick={() => navigate('/admin/users')}
+          className="bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
+        >
+          Пользователи
         </button>
       </div>
     </div>

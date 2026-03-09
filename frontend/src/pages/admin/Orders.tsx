@@ -273,15 +273,6 @@ export default function AdminOrders() {
           )}
         </div>
       )}
-
-      <div className="mt-6">
-        <button
-          onClick={() => navigate('/admin/users')}
-          className="w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
-        >
-          Управление пользователями
-        </button>
-      </div>
     </div>
   )
 }
