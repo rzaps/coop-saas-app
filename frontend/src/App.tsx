@@ -46,11 +46,13 @@ function AppContent() {
 
   useEffect(() => {
     const ping = () => {
-      fetch('https://coop-saas-app.onrender.com/')
+      fetch('https://coop-saas-app.onrender.com/health')
         .catch(() => {
           // Ignore errors - just keep pinging
         })
     }
+    // Ping immediately on mount
+    ping()
     const interval = setInterval(ping, 14 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])

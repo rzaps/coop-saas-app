@@ -36,6 +36,10 @@ app.include_router(users.router)
 def read_root():
     return {"message": "Group Purchase API"}
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
 @app.get("/debug/tables")
 async def debug_tables(db: AsyncSession = Depends(get_db)):
     result = await db.execute(text("SELECT tablename FROM pg_tables WHERE schemaname='public'"))
