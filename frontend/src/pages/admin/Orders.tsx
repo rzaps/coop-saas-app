@@ -71,7 +71,7 @@ export default function AdminOrders() {
   const copyToClipboard = () => {
     const aggregations: OrderAggregation[] = aggregationsData?.aggregations || []
     const text = aggregations
-      .map((agg) => `${agg.product_name} — ${agg.total_quantity} ${agg.unit}`)
+      .map((agg) => `${agg.product_name} — ${parseFloat(agg.total_quantity).toFixed(2)} ${agg.unit === 'kg' ? 'кг' : 'шт'}`)
       .join('\n')
 
     navigator.clipboard.writeText(text)
@@ -168,7 +168,7 @@ export default function AdminOrders() {
                     <tr key={agg.product_id}>
                       <td className="px-4 py-3 text-sm">{agg.product_name}</td>
                       <td className="px-4 py-3 text-sm text-right">
-                        {agg.total_quantity} {agg.unit}
+                        {parseFloat(agg.total_quantity).toFixed(2)} {agg.unit === 'kg' ? 'кг' : 'шт'}
                       </td>
                       <td className="px-4 py-3 text-sm text-right">{agg.orders_count}</td>
                     </tr>
@@ -235,9 +235,9 @@ export default function AdminOrders() {
                       {order.items.map((item, idx) => (
                         <div key={idx} className="flex justify-between text-sm">
                           <span className="text-gray-700">
-                            {item.product_name} — {item.quantity} {item.unit}
+                            {item.product_name} — {parseFloat(item.quantity.toString()).toFixed(2)} {item.unit === 'kg' ? 'кг' : 'шт'}
                           </span>
-                          <span className="font-semibold">{item.subtotal} ₽</span>
+                          <span className="font-semibold">{parseFloat(item.subtotal.toString()).toFixed(2)} ₽</span>
                         </div>
                       ))}
                     </div>
@@ -245,7 +245,7 @@ export default function AdminOrders() {
                     {/* Total */}
                     <div className="border-t pt-2 flex justify-between font-bold">
                       <span>Итого:</span>
-                      <span>{order.total} ₽</span>
+                      <span>{parseFloat(order.total.toString()).toFixed(2)} ₽</span>
                     </div>
 
                     {/* Comment */}

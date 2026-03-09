@@ -131,8 +131,8 @@ export default function Catalog() {
                     )}
                   </div>
                   <div className="text-right ml-4">
-                    <p className="font-bold text-lg">{product.price} ₽</p>
-                    <p className="text-sm text-gray-600">{product.unit}</p>
+                    <p className="font-bold text-lg">{parseFloat(product.price).toFixed(2)} ₽</p>
+                    <p className="text-sm text-gray-600">{product.unit === 'kg' ? 'кг' : 'шт'}</p>
                   </div>
                 </div>
                 {product.available && (

@@ -24,7 +24,7 @@ export default function AdminProducts() {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
-    unit: 'kg',
+    unit: 'кг',
     note: '',
     category_id: '',
   })
@@ -60,7 +60,7 @@ export default function AdminProducts() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-products'] })
       setShowCreateForm(false)
-      setFormData({ name: '', price: '', unit: 'kg', note: '', category_id: '' })
+      setFormData({ name: '', price: '', unit: 'кг', note: '', category_id: '' })
       toast.success('Товар создан')
     },
   })
@@ -145,8 +145,8 @@ export default function AdminProducts() {
               onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             >
-              <option value="kg">кг</option>
-              <option value="pcs">шт</option>
+              <option value="кг">кг</option>
+              <option value="шт">шт</option>
             </select>
             <select
               value={formData.category_id}
@@ -190,7 +190,7 @@ export default function AdminProducts() {
               <div>
                 <h3 className="font-semibold">{product.name}</h3>
                 <p className="text-sm text-gray-600">
-                  {product.price} ₽ / {product.unit}
+                  {parseFloat(product.price).toFixed(2)} ₽ / {product.unit}
                 </p>
                 {product.note && (
                   <p className="text-sm text-gray-500 mt-1">{product.note}</p>

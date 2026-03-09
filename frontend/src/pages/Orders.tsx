@@ -83,16 +83,16 @@ export default function Orders() {
                     {order.status === 'confirmed' ? 'Подтвержден' : order.status}
                   </span>
                 </div>
-                <p className="text-xl font-bold text-blue-600">{order.total} ₽</p>
+                <p className="text-xl font-bold text-blue-600">{parseFloat(order.total).toFixed(2)} ₽</p>
               </div>
 
               <div className="space-y-2 mb-4">
                 {order.items.map((item) => (
                   <div key={item.id} className="flex justify-between text-sm">
                     <span className="text-gray-700">
-                      {item.product_name} × {item.quantity} {item.unit}
+                      {item.product_name} × {parseFloat(item.quantity).toFixed(2)} {item.unit === 'kg' ? 'кг' : 'шт'}
                     </span>
-                    <span className="font-semibold">{item.subtotal} ₽</span>
+                    <span className="font-semibold">{parseFloat(item.subtotal).toFixed(2)} ₽</span>
                   </div>
                 ))}
               </div>

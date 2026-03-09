@@ -123,7 +123,7 @@ export default function Cart() {
                   <div className="flex-1">
                     <h3 className="font-semibold">{item.product_name}</h3>
                     <p className="text-sm text-gray-600">
-                      {item.price} ₽ / {item.unit}
+                      {parseFloat(item.price).toFixed(2)} ₽ / {item.unit === 'kg' ? 'кг' : 'шт'}
                     </p>
                   </div>
                   <button
@@ -171,7 +171,7 @@ export default function Cart() {
                       +
                     </button>
                   </div>
-                  <p className="font-bold">{item.subtotal} ₽</p>
+                  <p className="font-bold">{parseFloat(item.subtotal).toFixed(2)} ₽</p>
                 </div>
               </div>
             ))}
@@ -195,7 +195,7 @@ export default function Cart() {
             <div className="max-w-md mx-auto">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-lg font-semibold">Итого:</span>
-                <span className="text-2xl font-bold text-blue-600">{cart.total} ₽</span>
+                <span className="text-2xl font-bold text-blue-600">{parseFloat(cart.total).toFixed(2)} ₽</span>
               </div>
               <button
                 onClick={() => confirmOrderMutation.mutate()}

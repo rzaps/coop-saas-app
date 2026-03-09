@@ -6,8 +6,8 @@ from app.database import Base
 
 
 class UnitEnum(str, Enum):
-    kg = "kg"
-    pcs = "pcs"
+    kg = "кг"
+    pcs = "шт."
 
 
 class Product(Base):
