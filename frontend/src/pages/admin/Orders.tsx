@@ -203,6 +203,7 @@ export default function AdminOrders() {
                 >
                   <div className="flex justify-between items-start">
                     <div>
+                      <p className="text-xs text-gray-500 font-medium">Заказ #{order.order_id}</p>
                       <p className="font-semibold">
                         {order.user_first_name} {order.user_last_name}
                       </p>

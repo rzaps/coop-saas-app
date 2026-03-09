@@ -70,6 +70,7 @@ export default function Orders() {
             <div key={order.id} className="bg-white rounded-lg shadow p-4">
               <div className="flex justify-between items-start mb-4">
                 <div>
+                  <p className="text-xs text-gray-500 font-medium">Заказ #{order.id}</p>
                   <p className="text-sm text-gray-600">
                     {new Date(order.created_at).toLocaleDateString()}
                   </p>
