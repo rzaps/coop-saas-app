@@ -78,10 +78,16 @@ export default function Orders() {
                     className={`inline-block px-2 py-1 text-xs rounded mt-1 ${
                       order.status === 'confirmed'
                         ? 'bg-green-100 text-green-800'
-                        : 'bg-gray-100 text-gray-800'
+                        : order.status === 'closed'
+                        ? 'bg-gray-100 text-gray-800'
+                        : 'bg-yellow-100 text-yellow-800'
                     }`}
                   >
-                    {order.status === 'confirmed' ? 'Подтвержден' : order.status}
+                    {order.status === 'confirmed' 
+                      ? 'Подтвержден' 
+                      : order.status === 'closed' 
+                      ? 'Закрыт' 
+                      : 'Черновик'}
                   </span>
                 </div>
                 <p className="text-xl font-bold text-blue-600">{parseFloat(order.total).toFixed(2)} ₽</p>
