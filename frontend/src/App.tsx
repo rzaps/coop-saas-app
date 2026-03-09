@@ -45,7 +45,12 @@ function AppContent() {
   const showHelpButton = location.pathname !== '/login'
 
   useEffect(() => {
-    const ping = () => fetch('https://coop-saas-app.onrender.com/')
+    const ping = () => {
+      fetch('https://coop-saas-app.onrender.com/')
+        .catch(() => {
+          // Ignore errors - just keep pinging
+        })
+    }
     const interval = setInterval(ping, 14 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
