@@ -37,6 +37,7 @@ def read_root():
     return {"message": "Group Purchase API"}
 
 @app.get("/health")
+@app.head("/health")
 def health_check():
     return {"status": "ok"}
 
